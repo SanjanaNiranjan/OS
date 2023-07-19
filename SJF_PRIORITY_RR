@@ -30,25 +30,24 @@ void calculateTimes(struct Process proc[], int n, int quantum) {
         total_tat += proc[i].tat;
     }
    
-    // Print the process details
+    
     printf("Process\tBurst Time\tArrival Time\tPriority\tWaiting Time\tTurnaround Time\n");
     for (int i = 0; i < n; i++) {
         printf("%d\t%d\t\t%d\t\t%d\t\t%d\t\t%d\n", proc[i].pid, proc[i].bt, proc[i].at, proc[i].priority, proc[i].wt, proc[i].tat);
     }
    
-    // Print average waiting time and average turnaround time
     printf("\nAverage Waiting Time: %.2f\n", (float)total_wt / n);
     printf("Average Turnaround Time: %.2f\n", (float)total_tat / n);
 }
 
-// Function to swap two processes
+
 void swap(struct Process* a, struct Process* b) {
     struct Process temp = *a;
     *a = *b;
     *b = temp;
 }
 
-// Function to sort the processes based on their burst time (SJF algorithm)
+
 void sortByBurstTime(struct Process proc[], int n) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
@@ -59,7 +58,7 @@ void sortByBurstTime(struct Process proc[], int n) {
     }
 }
 
-// Function to sort the processes based on their priority (Priority algorithm)
+
 void sortByPriority(struct Process proc[], int n) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
@@ -70,7 +69,7 @@ void sortByPriority(struct Process proc[], int n) {
     }
 }
 
-// Function to simulate Round Robin scheduling algorithm
+
 void roundRobin(struct Process proc[], int n, int quantum) {
     int rem_bt[n];
     for (int i = 0; i < n; i++) {
@@ -107,13 +106,13 @@ void roundRobin(struct Process proc[], int n, int quantum) {
 }
 
 int main() {
-    int n;  // Number of processes
+    int n;  
     printf("Enter the number of processes: ");
     scanf("%d", &n);
 
-    struct Process proc[n];  // Array to store the processes
+    struct Process proc[n];  
 
-    // Input the details of each process
+   
     for (int i = 0; i < n; i++) {
         printf("Process %d\n", i + 1);
         proc[i].pid = i + 1;
@@ -125,18 +124,18 @@ int main() {
         scanf("%d", &proc[i].priority);
     }
 
-    // Sort the processes based on the scheduling algorithm
-    sortByBurstTime(proc, n);  // SJF (Non-preemptive)
-    calculateTimes(proc, n, 0);  // Calculate turnaround time and waiting time
+    
+    sortByBurstTime(proc, n);  
+    calculateTimes(proc, n, 0);  
 
-    sortByPriority(proc, n);  // Priority (Non-preemptive)
-    calculateTimes(proc, n, 0);  // Calculate turnaround time and waiting time
+    sortByPriority(proc, n);
+    calculateTimes(proc, n, 0); 
 
-    int quantum;  // Quantum size for Round Robin algorithm
+    int quantum;  
     printf("Enter Quantum Size for Round Robin Algorithm: ");
     scanf("%d", &quantum);
-    roundRobin(proc, n, quantum);  // Round Robin
-    calculateTimes(proc, n, quantum);  // Calculate turnaround time and waiting time
+    roundRobin(proc, n, quantum);  
+    calculateTimes(proc, n, quantum); 
 
     return 0;
 }
